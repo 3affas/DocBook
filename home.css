@@ -468,3 +468,11 @@ footer {
     flex: 1;
     min-width: 300px;
 }
+.search-box input,
+.search-box select {
+    width: 30%;
+}
+
+.search-box button {
+    width: auto;
+}

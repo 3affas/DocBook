@@ -3,63 +3,63 @@
 // When user clicks "Book Now", it smoothly scrolls
 // to the "How It Works" section
 
-
-document.getElementById("bookBtn").addEventListener("click", function () {
-    document.getElementById("steps").scrollIntoView({
-        behavior: "smooth"
-    });
-});
-
-
-// LOGIN BUTTON (PLACEHOLDER)
-// Shows an alert since login feature is not implemented yet
-
-
-document.getElementById("loginBtn").addEventListener("click", function () {
-    alert("Login feature coming soon!");
-});
-
-
-// SEARCH FUNCTIONALITY
-// Filters doctor cards based on specialty and location input
-
-
-document.getElementById("searchBtn").addEventListener("click", function () {
-
-    // Get user input values
-    const specialtyInput = document.querySelector('.search-box input[placeholder="Specialty (e.g. Dentist)"]').value.toLowerCase().trim();
-    const locationInput = document.querySelector('.search-box input[placeholder="Location"]').value.toLowerCase().trim();
-
-    // Loop through all doctor cards and filter them
-    const doctorCards = document.querySelectorAll(".doctor-card");
-    doctorCards.forEach(card => {
-        const cardSpecialty = card.dataset.specialty.toLowerCase().trim();
-        const cardLocation = card.dataset.location.toLowerCase().trim();
-
-        // Check if card matches search criteria
-        let matchSpecialty = specialtyInput === "" || cardSpecialty.includes(specialtyInput);
-        let matchLocation = locationInput === "" || cardLocation.includes(locationInput);
-
-        // Show or hide card based on match
-        if (matchSpecialty && matchLocation) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
-    });
-
-    // Scroll automatically to doctors section after search
-    document.getElementById("doctors").scrollIntoView({
-        behavior: "smooth"
-    });
-});
-
-
-// DOCTOR CARDS AND FILTER SYSTEM
-// Handles filtering doctors by specialty buttons
-
-// Wait for DOM to load before attaching event listeners
 document.addEventListener("DOMContentLoaded", function() {
+    
+    document.getElementById("bookBtn").addEventListener("click", function () {
+        document.getElementById("steps").scrollIntoView({
+            behavior: "smooth"
+        });
+    });
+
+
+    // LOGIN BUTTON (PLACEHOLDER)
+    // Shows an alert since login feature is not implemented yet
+
+    const loginBtn = document.getElementById("loginBtn");
+    if (loginBtn) {
+        loginBtn.addEventListener("click", function () {
+            alert("Login feature coming soon!");
+        });
+    }
+
+
+    // SEARCH FUNCTIONALITY
+    // Filters doctor cards based on specialty and location input
+
+    document.getElementById("searchBtn").addEventListener("click", function () {
+
+        // Get user input values
+        const specialtyInput = document.querySelector('.search-box input[placeholder="Specialty (e.g. Dentist)"]').value.toLowerCase().trim();
+        const locationInput = document.querySelector('.search-box input[placeholder="Location"]').value.toLowerCase().trim();
+
+        // Loop through all doctor cards and filter them
+        const doctorCards = document.querySelectorAll(".doctor-card");
+        doctorCards.forEach(card => {
+            const cardSpecialty = card.dataset.specialty.toLowerCase().trim();
+            const cardLocation = card.dataset.location.toLowerCase().trim();
+
+            // Check if card matches search criteria
+            let matchSpecialty = specialtyInput === "" || cardSpecialty.includes(specialtyInput);
+            let matchLocation = locationInput === "" || cardLocation.includes(locationInput);
+
+            // Show or hide card based on match
+            if (matchSpecialty && matchLocation) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+
+        // Scroll automatically to doctors section after search
+        document.getElementById("doctors").scrollIntoView({
+            behavior: "smooth"
+        });
+    });
+
+
+    // DOCTOR CARDS AND FILTER SYSTEM
+    // Handles filtering doctors by specialty buttons
+
     const doctorCards = document.querySelectorAll(".doctor-card");
     const filterButtons = document.querySelectorAll(".filter-btn");
 
@@ -92,48 +92,48 @@ document.addEventListener("DOMContentLoaded", function() {
 
         });
     });
-});
 
 
-// CONTACT FORM HANDLING
-// Validates form, stores messages in localStorage,
-// and shows success message
+    // CONTACT FORM HANDLING
+    // Validates form, stores messages in localStorage,
+    // and shows success message
 
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+        e.preventDefault(); // Prevent page reload
 
-document.getElementById("contactForm").addEventListener("submit", function(e) {
-    e.preventDefault(); // Prevent page reload
+        // Get form values
+        const name = document.getElementById("contactName").value.trim();
+        const email = document.getElementById("contactEmail").value.trim();
+        const message = document.getElementById("contactMessage").value.trim();
 
-    // Get form values
-    const name = document.getElementById("contactName").value.trim();
-    const email = document.getElementById("contactEmail").value.trim();
-    const message = document.getElementById("contactMessage").value.trim();
+        // Validate inputs
+        if (!name || !email || !message) {
+            alert("Please fill all fields.");
+            return;
+        }
 
-    // Validate inputs
-    if (!name || !email || !message) {
-        alert("Please fill all fields.");
-        return;
-    }
+        // Create contact message object
+        const contactData = {
+            name,
+            email,
+            message,
+            date: new Date().toLocaleString()
+        };
 
-    // Create contact message object
-    const contactData = {
-        name,
-        email,
-        message,
-        date: new Date().toLocaleString()
-    };
+        // Retrieve existing messages from localStorage
+        let messages = JSON.parse(localStorage.getItem("messages")) || [];
 
-    // Retrieve existing messages from localStorage
-    let messages = JSON.parse(localStorage.getItem("messages")) || [];
+        // Add new message
+        messages.push(contactData);
 
-    // Add new message
-    messages.push(contactData);
+        // Save back to localStorage
+        localStorage.setItem("messages", JSON.stringify(messages));
 
-    // Save back to localStorage
-    localStorage.setItem("messages", JSON.stringify(messages));
+        // Show success message
+        document.getElementById("contactSuccess").style.display = "block";
 
-    // Show success message
-    document.getElementById("contactSuccess").style.display = "block";
+        // Reset form fields
+        document.getElementById("contactForm").reset();
+    });
 
-    // Reset form fields
-    document.getElementById("contactForm").reset();
 });

@@ -15,9 +15,8 @@
     <h2>DocBook</h2>
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="doctors.html">Doctors</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="login.html" class="login-nav-btn">Logout</a></li>
+        <li><a href="index.html#doctors">Doctors</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
     </ul>
 </nav>
 
@@ -105,35 +104,8 @@
 
 </section>
 
-<!-- Authentication and Profile Scripts -->
-<script src="authentication.js"></script>
+<!-- Profile Scripts -->
 <script src="profile.js"></script>
-
-<!-- Authentication Check -->
-<script>
-    // Check if user is logged in before viewing profile
-    if (!sessionStorage.getItem('isLoggedIn')) {
-        alert("Please log in to view doctor profiles.");
-        window.location.href = 'login.html';
-    }
-
-    // Display logged-in user name in navbar (optional)
-    const activeUser = sessionStorage.getItem('activeUser');
-    if (activeUser) {
-        const logoutBtn = document.querySelector('.login-nav-btn');
-        if (logoutBtn) {
-            logoutBtn.textContent = `Logout (${activeUser})`;
-        }
-    }
-
-    // Logout functionality
-    document.querySelector('.login-nav-btn').addEventListener('click', function(e) {
-        e.preventDefault();
-        sessionStorage.removeItem('isLoggedIn');
-        sessionStorage.removeItem('activeUser');
-        window.location.href = 'login.html';
-    });
-</script>
 
 </body>
 </html>

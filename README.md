@@ -1,6 +1,6 @@
-﻿# DocBook – Online Doctor Appointment Booking Platform
+# DocBook – Online Doctor Appointment Booking Platform
 
-DocBook is a responsive web application that allows patients to search for doctors, view their profiles, and book appointments online. It was built as a coursework project in collaboration with 2 classmates.
+DocBook is a responsive web application that allows patients to search for doctors, view their profiles, and book appointments online. It was built as a coursework project in collaboration with 2 c[...]
 
 ## 🔗 Live Demo
 [comming soon]
@@ -19,7 +19,7 @@ DocBook is a responsive web application that allows patients to search for docto
 - JavaScript (vanilla)
 
 ## My Contribution
-Led development of the platform, building the majority of the site including the homepage, doctor search/filtering functionality, individual doctor profile pages, and the appointment booking system. Collaborated with 2 classmates on additional features and testing.
+Led development of the platform, building the majority of the site including the homepage, doctor search/filtering functionality, individual doctor profile pages, and the appointment booking syste[...]
 
 ## Screenshots
 
@@ -36,10 +36,10 @@ Led development of the platform, building the majority of the site including the
 To run this project locally:
 
 1. Clone the repository
-   \`\`\`bash
+   ```bash
    git clone https://github.com/3affas/docbook.git
-   \`\`\`
-2. Open `Home_page.html` in your browser
+   ```
+2. Open `index.html` in your browser
 
 No build steps or dependencies required — this is a static HTML/CSS/JS project.
 

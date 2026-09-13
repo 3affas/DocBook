@@ -105,11 +105,16 @@ let selectedSlot = null;
 
 
 // SHOW BOOKING SECTION
-// Displays booking form when user clicks "Book Appointment"
+// Displays booking form with slide-down animation when user clicks "Book Appointment"
 
 
 function book() {
-    document.getElementById("bookingSection").style.display = "block";
+    const bookingSection = document.getElementById("bookingSection");
+    bookingSection.style.display = "block";
+    // Trigger animation by adding class
+    bookingSection.classList.add("slide-down");
+    // Scroll to booking section
+    bookingSection.scrollIntoView({ behavior: "smooth" });
 }
 
 

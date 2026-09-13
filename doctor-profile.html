@@ -10,9 +10,15 @@
 <body>
 
 <!-- NAVIGATION BAR  -->
-<!-- Simple navbar showing the website name -->
+<!-- Simple navbar showing the website name and navigation links -->
 <nav>
     <h2>DocBook</h2>
+    <ul class="nav-links">
+        <li><a href="Home_page.html">Home</a></li>
+        <li><a href="doctors.html">Doctors</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html" class="login-nav-btn">Logout</a></li>
+    </ul>
 </nav>
 
 <!--  PROFILE PAGE SECTION  -->
@@ -61,21 +67,21 @@
 
     <!--  BOOKING SECTION  -->
     <!-- Hidden booking form that appears when user clicks booking button -->
-    <div class="booking-section" id="bookingSection" style="display:none; margin-top:20px;">
+    <div class="booking-section" id="bookingSection" style="display:none; margin-top:20px; width:100%; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
 
         <h3>Book Appointment</h3>
 
         <!-- Patient details input -->
-        <input type="text" id="patientName" placeholder="Your Name" required>
-        <input type="tel" id="patientPhone" placeholder="Phone Number" required>
-        <input type="email" id="patientemail" placeholder="Email" required>
+        <input type="text" id="patientName" placeholder="Your Name" required class="form-input">
+        <input type="tel" id="patientPhone" placeholder="Phone Number" required class="form-input">
+        <input type="email" id="patientemail" placeholder="Email" required class="form-input">
 
         <!-- Appointment date selection -->
-        <label>Select Date:</label>
-        <input type="date" id="appointmentDate">
+        <label for="appointmentDate" style="display: block; margin-top: 15px; margin-bottom: 5px; font-weight: 600;">Select Date:</label>
+        <input type="date" id="appointmentDate" required class="form-input">
 
         <!-- Time slot selection -->
-        <h4>Select Time:</h4>
+        <h4 style="margin-top: 20px; margin-bottom: 15px;">Select Time:</h4>
         <div class="time-slots">
             <div class="slot">10:00 AM</div>
             <div class="slot">11:00 AM</div>
@@ -85,19 +91,49 @@
         </div>
 
         <!-- Confirm booking button -->
-        <button onclick="confirmBooking()">Confirm Booking</button>
+        <button onclick="confirmBooking()" style="margin-top: 20px; padding: 12px 25px; background: #2a7de1; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Confirm Booking</button>
 
         <!-- Success message after booking -->
-        <p id="successMessage" style="color:green; margin-top:10px; display:none;">
-            Appointment booked successfully!
+        <p id="successMessage" style="color:green; margin-top:10px; display:none; font-weight: 600;">
+            ✓ Appointment booked successfully!
         </p>
+
+        <!-- Error message for validation -->
+        <p id="errorMessage" style="color:red; margin-top:10px; display:none; font-weight: 600;"></p>
 
     </div>
 
 </section>
 
-<!-- External JavaScript file for profile functionality -->
+<!-- Authentication and Profile Scripts -->
+<script src="authentication.js"></script>
 <script src="profile.js"></script>
+
+<!-- Authentication Check -->
+<script>
+    // Check if user is logged in before viewing profile
+    if (!sessionStorage.getItem('isLoggedIn')) {
+        alert("Please log in to view doctor profiles.");
+        window.location.href = 'login.html';
+    }
+
+    // Display logged-in user name in navbar (optional)
+    const activeUser = sessionStorage.getItem('activeUser');
+    if (activeUser) {
+        const logoutBtn = document.querySelector('.login-nav-btn');
+        if (logoutBtn) {
+            logoutBtn.textContent = `Logout (${activeUser})`;
+        }
+    }
+
+    // Logout functionality
+    document.querySelector('.login-nav-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('activeUser');
+        window.location.href = 'login.html';
+    });
+</script>
 
 </body>
 </html>

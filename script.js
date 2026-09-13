@@ -27,13 +27,13 @@ document.getElementById("loginBtn").addEventListener("click", function () {
 document.getElementById("searchBtn").addEventListener("click", function () {
 
     // Get user input values
-    const specialtyInput = document.querySelector('.search-box input[placeholder="Specialty (e.g. Dentist)"]').value.toLowerCase();
-    const locationInput = document.querySelector('.search-box input[placeholder="Location"]').value.toLowerCase();
+    const specialtyInput = document.querySelector('.search-box input[placeholder="Specialty (e.g. Dentist)"]').value.toLowerCase().trim();
+    const locationInput = document.querySelector('.search-box input[placeholder="Location"]').value.toLowerCase().trim();
 
     // Loop through all doctor cards and filter them
     doctorCards.forEach(card => {
-        const cardSpecialty = card.dataset.specialty.toLowerCase();
-        const cardLocation = card.dataset.location.toLowerCase();
+        const cardSpecialty = card.dataset.specialty.toLowerCase().trim();
+        const cardLocation = card.dataset.location.toLowerCase().trim();
 
         // Check if card matches search criteria
         let matchSpecialty = specialtyInput === "" || cardSpecialty.includes(specialtyInput);
@@ -70,15 +70,16 @@ filterButtons.forEach(btn => {
         // Add active class to clicked button
         btn.classList.add("active");
 
-        const specialty = btn.dataset.specialty;
+        const specialty = btn.dataset.specialty.toLowerCase().trim();
 
         // Show/hide doctor cards based on selected specialty
         doctorCards.forEach(card => {
+            const cardSpecialty = card.dataset.specialty.toLowerCase().trim();
 
             if (specialty === "all") {
                 card.style.display = "block";
             } else {
-                if (card.dataset.specialty === specialty) {
+                if (cardSpecialty === specialty) {
                     card.style.display = "block";
                 } else {
                     card.style.display = "none";

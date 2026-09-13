@@ -1,4 +1,3 @@
-
 // Doctors data page infos upon doctor icon clicking
 // Stores all doctor information including name, specialty, images, biography, location, email, and phone number
 
@@ -50,7 +49,7 @@ const doctors = {
         specialty: "Orthopedic",
         images: [
             "Diego-Martínez/Diego-Martinez-profile-pic.jpg",
-            "Diego-Martínez/Diego-martinez-pic-2.jpg",
+            "Diego-Martínez/Diego-Martinez-pic-2.jpg",
         ],
         bio: "Orthopedic surgeon specializing in joints, fractures, and sports injuries.",
         location: "London, UK",
@@ -174,8 +173,9 @@ function confirmBooking() {
 
     const docName = document.getElementById("docName").textContent;
 
-    // Store booking information in cookie
-    document.cookie = `booking=Appointment with ${docName} on ${date} at ${selectedSlot}, More information will be sent to you via email and SMS.; path=/`;
+    // Store booking information in cookie (URL encoded)
+    const bookingInfo = `Appointment with ${docName} on ${date} at ${selectedSlot}, More information will be sent to you via email and SMS.`;
+    document.cookie = `booking=${encodeURIComponent(bookingInfo)}; path=/`;
 
     // Reload page to display confirmation message
     location.reload();
@@ -220,6 +220,6 @@ if (bookingMessage) {
 
     document.querySelector(".profile-right").appendChild(messageBox);
 
-    // Clear cookie after displaying message
-    document.cookie = "booking=; expires=Thu, 01 Jan 1970 00:00:00 UTC,; path=/;";
+    // Clear cookie after displaying message (fixed syntax error)
+    document.cookie = "booking=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }

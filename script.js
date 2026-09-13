@@ -31,6 +31,7 @@ document.getElementById("searchBtn").addEventListener("click", function () {
     const locationInput = document.querySelector('.search-box input[placeholder="Location"]').value.toLowerCase().trim();
 
     // Loop through all doctor cards and filter them
+    const doctorCards = document.querySelectorAll(".doctor-card");
     doctorCards.forEach(card => {
         const cardSpecialty = card.dataset.specialty.toLowerCase().trim();
         const cardLocation = card.dataset.location.toLowerCase().trim();
@@ -57,37 +58,39 @@ document.getElementById("searchBtn").addEventListener("click", function () {
 // DOCTOR CARDS AND FILTER SYSTEM
 // Handles filtering doctors by specialty buttons
 
+// Wait for DOM to load before attaching event listeners
+document.addEventListener("DOMContentLoaded", function() {
+    const doctorCards = document.querySelectorAll(".doctor-card");
+    const filterButtons = document.querySelectorAll(".filter-btn");
 
-const doctorCards = document.querySelectorAll(".doctor-card");
-const filterButtons = document.querySelectorAll(".filter-btn");
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", function() {
 
-filterButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(b => b.classList.remove("active"));
 
-        // Remove active class from all buttons
-        filterButtons.forEach(b => b.classList.remove("active"));
+            // Add active class to clicked button
+            btn.classList.add("active");
 
-        // Add active class to clicked button
-        btn.classList.add("active");
+            const specialty = btn.dataset.specialty.toLowerCase().trim();
 
-        const specialty = btn.dataset.specialty.toLowerCase().trim();
+            // Show/hide doctor cards based on selected specialty
+            doctorCards.forEach(card => {
+                const cardSpecialty = card.dataset.specialty.toLowerCase().trim();
 
-        // Show/hide doctor cards based on selected specialty
-        doctorCards.forEach(card => {
-            const cardSpecialty = card.dataset.specialty.toLowerCase().trim();
-
-            if (specialty === "all") {
-                card.style.display = "block";
-            } else {
-                if (cardSpecialty === specialty) {
+                if (specialty === "all") {
                     card.style.display = "block";
                 } else {
-                    card.style.display = "none";
+                    if (cardSpecialty === specialty) {
+                        card.style.display = "block";
+                    } else {
+                        card.style.display = "none";
+                    }
                 }
-            }
+
+            });
 
         });
-
     });
 });
 
